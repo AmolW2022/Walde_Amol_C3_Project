@@ -1,13 +1,20 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mockito;
+import org.mockito.junit.jupiter.MockitoExtension;
+import org.mockito.stubbing.OngoingStubbing;
 
 import java.time.LocalTime;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.*;
+
+@ExtendWith(MockitoExtension.class)
 
 class RestaurantTest {
-    Restaurant restaurant;
+    Restaurant restaurant = mock(Restaurant.class);
 
 
     //REFACTOR ALL THE REPEATED LINES OF CODE
@@ -16,18 +23,21 @@ class RestaurantTest {
     //-------FOR THE 2 TESTS BELOW, YOU MAY USE THE CONCEPT OF MOCKING, IF YOU RUN INTO ANY TROUBLE
     @Test
     public void is_restaurant_open_should_return_true_if_time_is_between_opening_and_closing_time(){
-        LocalTime openingTime = LocalTime.parse("09:00am");
-        LocalTime closingTime = LocalTime.parse("11:00pm");
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
         restaurant = new Restaurant("Amelie's Cafe","Chennai",openingTime,closingTime);
+        System.out.println(restaurant.getCurrentTime());
         Assertions.assertTrue(restaurant.isRestaurantOpen());
         //WRITE UNIT TEST CASE HERE
     }
 
     @Test
     public void is_restaurant_open_should_return_false_if_time_is_outside_opening_and_closing_time(){
-        LocalTime openingTime = LocalTime.parse("09:00am");
-        LocalTime closingTime = LocalTime.parse("11:00pm");
-        restaurant = new Restaurant("Amelie's Cafe","Chennai",openingTime,closingTime);
+        LocalTime openingTime = LocalTime.parse("10:30:00");
+        LocalTime closingTime = LocalTime.parse("22:00:00");
+        Restaurant restaurant = mock(Restaurant.class);
+        restaurant.openingTime = openingTime;
+        restaurant.closingTime = closingTime;
         Assertions.assertFalse(restaurant.isRestaurantOpen());
         //WRITE UNIT TEST CASE HERE
 
@@ -85,6 +95,6 @@ class RestaurantTest {
 
         int price = restaurant.getSelectedItemPrice();
         System.out.println("Your order will cost: " + price);
-        assertEquals(388, price);
+        assertEquals(707, price);
     }
 }
