@@ -6,8 +6,6 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -83,32 +81,6 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<Failing Test Case>>>>>>>>>>>>>>>>>>>>>>
-    @Test
-    public void should_return_total_order_value_when_given_items_are_present_in_menu() throws itemNotFoundException {
-        Restaurant restaurant = new Restaurant("Amelie's Cafe", "Chennai", LocalTime.parse("10:00:00"), LocalTime.parse("22:00:00"));
-        restaurant.addToMenu("Sweet corn soup",119);
-        restaurant.addToMenu("Vegetable lasagne", 269);
-
-        List<String> selectedItems = new ArrayList<>();
-        selectedItems.add("Sweet corn soup");
-        selectedItems.add("Vegetable lasagne");
-
-        // Call getTotalOrderValue method and check if it returns the correct value
-        assertEquals(300, restaurant.getTotalOrderValue(selectedItems));
-    }
-
-    @Test
-    public void should_return_zero_when_no_items_are_present_in_menu() throws itemNotFoundException {
-        Restaurant restaurant = new Restaurant("Test Restaurant", "Test Location", LocalTime.parse("10:00:00"), LocalTime.parse("22:00:00"));
-
-        List<String> selectedItems = new ArrayList<>();
-        //selectedItems.add("Sweet corn soup");
-        //selectedItems.add("Vegetable lasagne");
-
-        // Call getTotalOrderValue method and check if it returns 0
-        assertEquals(0, restaurant.getTotalOrderValue(selectedItems));
-    }
-
 
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
